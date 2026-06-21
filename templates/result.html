@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analysis</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+            padding:20px;
+        }
+
+        .container{
+            width:80%;
+            margin:auto;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px gray;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+        .score{
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        .progress{
+            width:100%;
+            background:#ddd;
+            border-radius:5px;
+        }
+
+        .progress-bar{
+            background:green;
+            color:white;
+            text-align:center;
+            padding:5px;
+        }
+
+        ul{
+            list-style-type:none;
+            padding:0;
+        }
+
+        li{
+            background:#007bff;
+            color:white;
+            display:inline-block;
+            margin:5px;
+            padding:8px 12px;
+            border-radius:5px;
+        }
+
+        pre{
+            white-space:pre-wrap;
+            background:#eee;
+            padding:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Resume Analysis</h1>
+
+<h2 class="score">Resume Score: {{ score }}/100</h2>
+
+<div class="progress">
+    <div class="progress-bar" style="width:{{ score }}%;">
+        {{ score }}%
+    </div>
+</div>
+
+<h2 style="color:blue;">
+Category: {{ category }}
+</h2>
+
+<h2 style="color:{{ ats_color }};">
+ATS Verdict: {{ ats_message }}
+</h2>
+
+<br>
+
+<a href="/download-report">
+    <button>
+        Download Report
+    </button>
+</a>
+
+<h3>Skills Found ({{ found_skills|length }})</h3>
+
+<ul>
+
+{% for skill in found_skills %}
+
+<li>{{ skill }}</li>
+
+{% endfor %}
+
+</ul>
+
+<h3>Recommended Skills</h3>
+
+<ul>
+
+{% for skill in missing_skills[:5] %}
+
+<li>{{ skill }}</li>
+
+{% endfor %}
+
+</ul>
+
+<h3>Extracted Resume Text</h3>
+
+<pre>{{ text }}</pre>
+
+</div>
+
+</body>
+</html>
